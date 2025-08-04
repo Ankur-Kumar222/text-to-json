@@ -45,6 +45,17 @@ def sanitize_schema(schema_part, parent_key=None):
 
     return schema_part
 
+def remove_dollar_properties(obj):
+    """
+    Recursively remove properties that start with '$' from a dictionary or list.
+    """
+    if isinstance(obj, dict):
+        return {k: remove_dollar_properties(v) for k, v in obj.items() if not k.startswith('$')}
+    elif isinstance(obj, list):
+        return [remove_dollar_properties(item) for item in obj]
+    else:
+        return obj
+
 resume_path = "/Users/ankur/Desktop/text-to-json/test-cases/test-case-3/Ankur_Resume.txt"
 
 schema_path = "/Users/ankur/Desktop/text-to-json/test-cases/test-case-3/convert your resume to this schema.json"
@@ -74,7 +85,9 @@ response = client.responses.create(
     temperature=0
 )
 
-print(response.output_text)
+parsed_json = json.loads(response.output_text)
+cleaned_json = remove_dollar_properties(parsed_json)
+cleaned_json_string = json.dumps(cleaned_json, indent=2, ensure_ascii=False)
 
 with open("/Users/ankur/Desktop/text-to-json/test-cases/test-case-3/Ankur_Resume.json", "w", encoding="utf-8") as output_file:
-    output_file.write(response.output_text)
+    output_file.write(cleaned_json_string)
