@@ -1,0 +1,17 @@
+[project]
+name = "text-to-json"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Ankur-Kumar222",email = "ankurisawesome7@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "openai (>=1.98.0,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
