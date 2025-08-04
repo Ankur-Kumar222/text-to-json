@@ -27,7 +27,7 @@ text-to-json/
 
 ---
 
-## ⚙️ Setup Guide
+## Setup Guide
 
 ### 1. Clone the Repository
 ```bash
@@ -43,7 +43,7 @@ cd text-to-json
 - Open `.env` and fill in the following:
     ```
     OPENAI_API_KEY=your_openai_api_key_here
-    LLM_MODEL=any model that supports structured outputs
+    LLM_MODEL=any_model_that_supports_structured_outputs
     ```
 
 ### 3. Install Dependencies
