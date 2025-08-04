@@ -1,0 +1,76 @@
+Ankur Kumar
+ +91 7838415108 | # ankurisawesome7@gmail.com | ï linkedin.com/in/ankur-kumar | § github.com/Ankur-Kumar222
+
+Education
+Plaksha University
+
+Mohali, India
+
+Tech Leaders Fellowship (AI, ML and Leadership); CGPA: 9.67/10.0
+
+Delhi University
+B.Sc. (Hons) Physics; CGPA: 8.92/10.0
+
+July 2024
+
+New Delhi, India
+June 2023
+
+Experience
+Associate AI Engineer
+
+Sep. 2024 – Present
+
+Predli – Sweden
+Remote
+• Researched and benchmarked Microsoft’s GraphRAG framework using Neo4j, comparing it against traditional
+RAG methods and analyzing graph construction and connectivity patterns
+• Developed a prompt optimization feature for a client platform by leveraging LLM-as-a-judge systems and
+integrating a complex scoring algorithm
+• Conducted extensive benchmarking of the platform across multiple LLMs to evaluate performance and ensure
+robustness
+• Designed an agentic chat system architecture integrating RAG, web search, and code execution agents using
+LangGraph and Python; implemented key features in both Python and TypeScript
+• Utilized Microsoft Azure for cloud-based development, deployment, and resource orchestration of AI services
+
+ML Engineer Consultant Intern
+
+Apr. 2024 – Jun. 2024
+
+Palo Alto Strategy Group – California
+Remote
+• Developed an NLP tool for generating executive summaries from interview transcripts, achieving an average
+BERTScore of 80% and reducing 4-8 hours of content to 5-minute summaries for PASG
+• Implemented a RAG-based chatbot to assist PASG with answering questions within the summaries, enhancing
+efficiency and accuracy by providing instant, context-aware responses
+• Leveraged AWS for scalable, reliable, and secure application development and deployment
+
+Subject Matter Expert
+
+Nov. 2022 – Mar. 2023
+
+Chegg India Pvt. Ltd.
+Remote
+• Delivered targeted assistance as a Freelance Subject Matter Expert (SME) at Chegg for Advanced Physics,
+supporting students in achieving mastery in challenging physics topics
+• Conveyed tailored solutions and explanations for intricate physics problems, enhancing student understanding and
+performance
+
+Projects
+CiteSync | Python, JS, NLP
+• Created CiteSync, a reference management tool using NLP for automated paper identification and citation
+• Developed a Word plugin for seamless integration, simplifying citation for researchers
+• Improved research efficiency by eliminating manual tracking and accurate citation, optimizing workflow
+Mudra Visualization | Python, OpenCV, MediaPipe, YOLOv8
+• Led development of Mudra Visualization, identifying 30 Indian classical dance mudras in real-time video
+• Utilized OpenCV, MediaPipe, and Ultralytics YOLO for data processing and model training
+• Achieved 80.0% accuracy and integrated real-time hand detection for seamless recognition
+
+Technical Skills
+Programming Languages: Python, SQL, TypeScript (Familiar), Fortran (Familiar)
+AI/ML Frameworks: PyTorch, TensorFlow, Scikit-learn, LangChain, LangGraph, LLMs, Hugging Face Transformers
+Cloud & DevOps/MLOps: Azure, AWS, Docker, Vercel
+Web Development: REST APIs, FastAPI, Flask, Streamlit, Bootstrap
+Tools: Git, Neo4j, Jupyter, PostgreSQL, DBeaver
+Skills: Machine Learning, Deep Learning, NLP, Computer Vision, Data Wrangling, Data Visualization, Web Scraping,
+LaTeX, Prototyping, Heuristic Evaluation
