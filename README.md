@@ -23,6 +23,7 @@ text-to-json/
 │           └── input.txt   # Text file to be parsed
 │       └── output/
 └── README.md
+└── documentation
 ```
 
 ---

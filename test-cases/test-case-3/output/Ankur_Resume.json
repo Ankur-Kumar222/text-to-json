@@ -6,13 +6,13 @@
     "email": "ankurisawesome7@gmail.com",
     "phone": "+91 7838415108",
     "url": "https://linkedin.com/in/ankur-kumar",
-    "summary": "AI Engineer with experience in NLP, computer vision, and cloud-based AI solutions. Skilled in developing innovative AI tools and systems, with a strong background in physics and leadership.",
+    "summary": "An AI Engineer with experience in NLP, ML, and computer vision, passionate about developing innovative AI solutions and leveraging cloud platforms for deployment.",
     "location": {
       "address": "Mohali, India",
       "postalCode": "",
       "city": "Mohali",
       "countryCode": "IN",
-      "region": ""
+      "region": "Punjab"
     },
     "profiles": [
       {
@@ -31,16 +31,18 @@
     {
       "name": "Predli",
       "location": "Sweden",
-      "description": "AI Solutions Company",
+      "description": "AI Technology Company",
       "position": "Associate AI Engineer",
       "url": "",
       "startDate": "2024-09-01",
       "endDate": "2024-12-31",
-      "summary": "Developed and benchmarked AI frameworks, designed chat systems, and utilized cloud services.",
+      "summary": "Researched and developed AI frameworks, optimized prompts, and designed chat system architecture using RAG, web search, and code execution agents.",
       "highlights": [
-        "Researched and benchmarked Microsoft’s GraphRAG framework using Neo4j",
-        "Developed prompt optimization features leveraging LLMs",
-        "Designed agentic chat system architecture with RAG, web search, and code execution"
+        "Researched Microsoft’s GraphRAG framework using Neo4j",
+        "Developed prompt optimization feature leveraging LLMs",
+        "Benchmarking platform performance across multiple LLMs",
+        "Designed agentic chat system with LangGraph and Python",
+        "Utilized Microsoft Azure for cloud deployment"
       ]
     },
     {
@@ -51,11 +53,12 @@
       "url": "",
       "startDate": "2024-04-01",
       "endDate": "2024-06-30",
-      "summary": "Developed NLP tools and chatbots to enhance content summarization and client engagement.",
+      "summary": "Developed NLP tools and RAG-based chatbots to enhance content summarization and question answering.",
       "highlights": [
-        "Created NLP summarization tool with BERTScore of 80%",
+        "Created NLP tool with BERTScore of 80%",
+        "Reduced content summarization time from hours to minutes",
         "Implemented RAG-based chatbot for instant responses",
-        "Leveraged AWS for deployment"
+        "Leveraged AWS for scalable deployment"
       ]
     },
     {
@@ -66,10 +69,10 @@
       "url": "",
       "startDate": "2022-11-01",
       "endDate": "2023-03-31",
-      "summary": "Provided physics expertise to support student learning and mastery.",
+      "summary": "Provided expert assistance in Advanced Physics, supporting student mastery in complex topics.",
       "highlights": [
-        "Assisted students in advanced physics topics",
-        "Delivered tailored solutions and explanations"
+        "Delivered targeted physics assistance",
+        "Enhanced student understanding and performance"
       ]
     }
   ],
@@ -83,7 +86,11 @@
       "startDate": "2022-07-01",
       "endDate": "2024-07-01",
       "score": "9.67/10.0",
-      "courses": []
+      "courses": [
+        "AI",
+        "ML",
+        "Leadership"
+      ]
     },
     {
       "institution": "Delhi University",
@@ -102,7 +109,7 @@
   "skills": [
     {
       "name": "Programming Languages",
-      "level": "",
+      "level": "Intermediate",
       "keywords": [
         "Python",
         "SQL",
@@ -112,7 +119,7 @@
     },
     {
       "name": "AI/ML Frameworks",
-      "level": "",
+      "level": "Advanced",
       "keywords": [
         "PyTorch",
         "TensorFlow",
@@ -125,7 +132,7 @@
     },
     {
       "name": "Cloud & DevOps/MLOps",
-      "level": "",
+      "level": "Advanced",
       "keywords": [
         "Azure",
         "AWS",
@@ -135,7 +142,7 @@
     },
     {
       "name": "Web Development",
-      "level": "",
+      "level": "Intermediate",
       "keywords": [
         "REST APIs",
         "FastAPI",
@@ -146,7 +153,7 @@
     },
     {
       "name": "Tools",
-      "level": "",
+      "level": "Intermediate",
       "keywords": [
         "Git",
         "Neo4j",
@@ -157,7 +164,7 @@
     },
     {
       "name": "Skills",
-      "level": "",
+      "level": "Expert",
       "keywords": [
         "Machine Learning",
         "Deep Learning",
@@ -180,13 +187,13 @@
       "name": "CiteSync",
       "description": "Reference management tool using NLP for automated paper identification and citation.",
       "highlights": [
-        "Created CiteSync, a reference management tool using NLP",
-        "Developed a Word plugin for seamless citation",
-        "Improved research efficiency"
+        "Created CiteSync with NLP",
+        "Developed Word plugin for seamless citation",
+        "Enhanced research efficiency"
       ],
       "keywords": [
         "NLP",
-        "Reference Management"
+        "Citation"
       ],
       "startDate": "2022-01-01",
       "endDate": "2022-12-31",
@@ -197,17 +204,16 @@
     },
     {
       "name": "Mudra Visualization",
-      "description": "Real-time Indian classical dance mudra recognition using computer vision.",
+      "description": "Real-time Indian classical dance mudra recognition using OpenCV, MediaPipe, and YOLOv8.",
       "highlights": [
-        "Identified 30 Indian classical dance mudras",
-        "Utilized OpenCV, MediaPipe, YOLO",
-        "Achieved 80% accuracy"
+        "Identified 30 mudras in real-time video",
+        "Achieved 80% accuracy",
+        "Integrated real-time hand detection"
       ],
       "keywords": [
         "OpenCV",
         "MediaPipe",
-        "YOLO",
-        "Computer Vision"
+        "YOLO"
       ],
       "startDate": "2022-06-01",
       "endDate": "2022-12-31",
@@ -220,6 +226,6 @@
   "meta": {
     "canonical": "https://jsonresume.org/schema.json",
     "version": "1.0.0",
-    "lastModified": "2023-10-01T00:00:00"
+    "lastModified": "2023-10-01T12:00:00"
   }
 }
