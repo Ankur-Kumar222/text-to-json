@@ -7,7 +7,7 @@ OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
 LLM_MODEL = os.environ['LLM_MODEL']
 client = OpenAI(api_key=OPENAI_API_KEY)
 
-def sanitize_schema(schema_part, parent_key=None):
+def sanitize_schema_draft_04(schema_part, parent_key=None):
     """
     Sanitize the JSON schema to ensure it adheres to expected types and formats.
     This function modifies the schema in place, ensuring that:
@@ -38,16 +38,103 @@ def sanitize_schema(schema_part, parent_key=None):
                 schema_part['required'] = list(schema_part['properties'].keys())
 
         for key, value in list(schema_part.items()):
-            schema_part[key] = sanitize_schema(value, parent_key=key)
+            schema_part[key] = sanitize_schema_draft_04(value, parent_key=key)
 
         if 'properties' in schema_part and 'type' not in schema_part:
             if 'required' not in schema_part:
                 schema_part['required'] = list(schema_part['properties'].keys())
 
     elif isinstance(schema_part, list):
-        return [sanitize_schema(item, parent_key=parent_key) for item in schema_part]
+        return [sanitize_schema_draft_04(item, parent_key=parent_key) for item in schema_part]
 
     return schema_part
+
+def sanitize_schema_draft_07(schema_part, parent_key=None, parent_obj=None):
+    """
+    Sanitize the JSON schema for draft-07 to ensure it adheres to expected types and formats.
+    - Ensures every object with 'properties' has a 'required' array containing all property names.
+    - Replaces 'const' with 'enum' and ensures 'type' is present for enums.
+    - Removes all 'oneOf' keys, simplifying to the most permissive or first option.
+    - Generalizes 'oneOf' simplification logic.
+    - Ensures every object schema has 'additionalProperties': false.
+    - Removes all properties when '$ref' is present.
+    - Removes unsupported formats.
+    - Removes 'uniqueItems' from arrays.
+    """
+    supported_formats = ['date-time', 'time', 'date', 'duration', 'email', 'hostname', 'ipv4', 'ipv6', 'uuid']
+    
+    if isinstance(schema_part, dict):
+        if '$ref' in schema_part:
+            ref_value = schema_part['$ref']
+            schema_part.clear()
+            schema_part['$ref'] = ref_value
+            return schema_part
+        
+        if schema_part.get('type') == 'string' and 'format' in schema_part:
+            if schema_part['format'] not in supported_formats:
+                del schema_part['format']
+        
+        if schema_part.get('type') == 'array' and 'uniqueItems' in schema_part:
+            del schema_part['uniqueItems']
+        
+        if schema_part.get('type') == 'object' or 'properties' in schema_part:
+            schema_part['additionalProperties'] = False
+            if 'properties' in schema_part:
+                schema_part['required'] = list(schema_part['properties'].keys())
+
+        if 'const' in schema_part:
+            const_value = schema_part.pop('const')
+            schema_part['enum'] = [const_value]
+            if 'type' not in schema_part:
+                schema_part['type'] = 'string'
+        if 'enum' in schema_part and 'type' not in schema_part:
+            schema_part['type'] = 'string'
+
+        if 'oneOf' in schema_part:
+            options = schema_part['oneOf']
+
+            if all(isinstance(opt, dict) and set(opt.keys()) <= {'required'} for opt in options):
+                required_keys = set()
+                for opt in options:
+                    required_keys.update(opt.get('required', []))
+                schema_part['required'] = list(required_keys)
+                schema_part.pop('oneOf', None)
+
+            elif all(isinstance(opt, dict) and '$ref' in opt for opt in options):
+                schema_part.clear()
+                schema_part['$ref'] = options[0]['$ref']
+
+            elif all(isinstance(opt, dict) and 'type' in opt for opt in options):
+                for k, v in options[0].items():
+                    schema_part[k] = v
+                schema_part.pop('oneOf', None)
+
+            elif all(isinstance(opt, dict) and set(opt.keys()) <= {'type', 'additionalProperties'} for opt in options):
+                for k, v in options[0].items():
+                    schema_part[k] = v
+                schema_part.pop('oneOf', None)
+            else:
+                schema_part.pop('oneOf', None)
+                schema_part['type'] = 'string'
+
+        for key, value in list(schema_part.items()):
+            schema_part[key] = sanitize_schema_draft_07(value, parent_key=key, parent_obj=schema_part)
+    elif isinstance(schema_part, list):
+        return [sanitize_schema_draft_07(item, parent_key=parent_key, parent_obj=parent_obj) for item in schema_part]
+    return schema_part
+
+def detect_schema_version(schema):
+    """
+    Detect the JSON Schema version from the $schema property.
+    Returns 'draft-04' or 'draft-07' or 'unknown'.
+    """
+    schema_url = schema.get('$schema', '')
+    if 'draft-04' in schema_url:
+        return 'draft-04'
+    elif 'draft-07' in schema_url:
+        return 'draft-07'
+    else:
+        return 'unknown'
 
 def sanitize_output(obj):
     """
@@ -85,18 +172,26 @@ def process_test_case(test_case_path):
         return
 
     with open(txt_file, 'r', encoding='utf-8') as f:
-        resume_text = f.read()
+        input_text = f.read()
 
     with open(schema_file, 'r') as f:
         schema = json.load(f)
 
-    schema = sanitize_schema(schema)
+    schema_version = detect_schema_version(schema)
+    
+    if schema_version == 'draft-04':
+        schema = sanitize_schema_draft_04(schema)
+    elif schema_version == 'draft-07':
+        schema = sanitize_schema_draft_07(schema)
+    else:
+        print(f"Warning: Unknown schema version, defaulting to draft-04 sanitization")
+        schema = sanitize_schema_draft_04(schema)
 
     response = client.responses.create(
         model=LLM_MODEL,
         input=[
             {"role": "system", "content": "You are a helpful assistant for parsing and structuring textual data according to a JSON schema."},
-            {"role": "user", "content": f"Convert this text to the specified JSON schema format:\n\n{resume_text}"}
+            {"role": "user", "content": f"Convert this text to the specified JSON schema format:\n\n{input_text}"}
         ],
         text={
             "format": {
@@ -120,7 +215,7 @@ def process_test_case(test_case_path):
     print(f"Output saved to {output_file_path}")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Resume Text-to-JSON Parser CLI")
+    parser = argparse.ArgumentParser(description="Text-to-JSON Parser CLI")
     parser.add_argument('--test-case', required=True, help='Path to the test-case-n folder')
 
     args = parser.parse_args()
